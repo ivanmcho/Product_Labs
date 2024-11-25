@@ -1,0 +1,11 @@
+train:
+  test_size: 0.2
+  random_state: 44
+  alpha: 0.11
+
+preprocessing:
+  target: Churn
+  features: [AccountViewingInteraction, AverageViewingDuration, EngagementScore, ContentDownloadsPerMonth, MonthlyCharges, AccountAge, ViewingHoursPerWeek, ViewingHoursVariation, BandwidthUsage, AnnualIncome, SupportTicketsPerMonth, UserRating, NetworkLatency, TotalCharges, CommentsOnContent, Age, SocialMediaInteractions, WatchlistSize, WebsiteVisitsPerWeek, PersonalizedRecommendations]
+
+
+  

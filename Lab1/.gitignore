@@ -1,0 +1,4 @@
+".dvc/cache/" 
+".dvc/temp/" 
+"models/" 
+"__pycache__/" 

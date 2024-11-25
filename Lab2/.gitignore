@@ -1,0 +1,9 @@
+model/*.joblib
+venv/
+env/
+ENV/
+data/
+
+.env
+.env.local
+.env.*.local

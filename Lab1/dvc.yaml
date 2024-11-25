@@ -1,0 +1,25 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py data/df_mflow_test.parquet data/clean_data.csv params.yaml
+    deps:
+    - data/data.csv
+    - params.yaml
+    outs:
+    - data/clean_data.csv
+  train:
+    cmd: python src/train.py data/clean_data.csv models/model.pkl params.yaml
+    deps:
+    - data/clean_data.csv
+    - params.yaml
+    outs:
+    - models/model.pkl
+  evaluate:
+    cmd: python src/evaluate.py data/clean_data.csv models/model.pkl metrics.json
+      params.yaml
+    deps:
+    - data/clean_data.csv
+    - models/model.pkl
+    - params.yaml
+    metrics:
+    - metrics.json:
+        cache: false

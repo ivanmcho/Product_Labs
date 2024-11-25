@@ -1,0 +1,15 @@
+Lab1/.dvc/cache/
+Lab1/.dv/tmp/
+Lab1/*pkl
+__pycache__/
+Lab1/*joblib
+Lab1/.dvc/config
+
+Lab2/*pkl
+Lab2/*.joblib
+Lab2/.dvc/config
+Lab2/data/input/processed/*
+Lab2/data/output/*
+Lab2/models/*.joblib
+Lab2/.env
+Lab2/*.env

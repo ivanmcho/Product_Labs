@@ -1,0 +1,55 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py data/df_mflow_test.parquet data/clean_data.csv params.yaml
+    deps:
+    - path: data/data.csv
+      hash: md5
+      md5: 801f8030dad1df22a53edfdbfa4e80f0
+      size: 29981
+    - path: params.yaml
+      hash: md5
+      md5: d2fbe63568ac8086be49af9061cef1fa
+      size: 495
+    outs:
+    - path: data/clean_data.csv
+      hash: md5
+      md5: 228574174ff32b59ab90cc98ac338e4d
+      size: 37425229
+  train:
+    cmd: python src/train.py data/clean_data.csv models/model.pkl params.yaml
+    deps:
+    - path: data/clean_data.csv
+      hash: md5
+      md5: 228574174ff32b59ab90cc98ac338e4d
+      size: 37425229
+    - path: params.yaml
+      hash: md5
+      md5: d2fbe63568ac8086be49af9061cef1fa
+      size: 495
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: 3b68f9753c6765471a62f4df2797f814
+      size: 2574
+  evaluate:
+    cmd: python src/evaluate.py data/clean_data.csv models/model.pkl metrics.json
+      params.yaml
+    deps:
+    - path: data/clean_data.csv
+      hash: md5
+      md5: 228574174ff32b59ab90cc98ac338e4d
+      size: 37425229
+    - path: models/model.pkl
+      hash: md5
+      md5: 3b68f9753c6765471a62f4df2797f814
+      size: 2574
+    - path: params.yaml
+      hash: md5
+      md5: d2fbe63568ac8086be49af9061cef1fa
+      size: 495
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 7e0c6d6888bc81eca26a6de4157b42ce
+      size: 66
