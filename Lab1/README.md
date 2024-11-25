@@ -1,6 +1,7 @@
-Aquí tienes un README profesional para tu pipeline con DVC:  
+# Universidad Galileo
+# Marcos Hernandez 
+## 24008899
 
----
 
 # Machine Learning Pipeline with DVC  
 

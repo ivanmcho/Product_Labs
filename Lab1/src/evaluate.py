@@ -34,12 +34,18 @@ def evaluate(input_file, model_file, metrics_file, params_file):
 
     # Calcular métricas
     mse = mean_squared_error(y, predictions)
+    rmse = mean_squared_error(y, predictions, squared=False)
+    mae = mean_absolute_error(y, predictions)
     r2 = r2_score(y, predictions)
 
     # Guardar métricas en un archivo JSON
     with open(metrics_file, 'w') as f:
-        json.dump({'mse': mse, 'r2': r2}, f, indent=4)
-    print(f"Métricas guardadas en {metrics_file}")
+    json.dump({
+        'mse': mse,
+        'rmse': rmse,
+        'mae': mae,
+        'r2': r2
+    }, f, indent=4)
 
 if __name__ == "__main__":
     input_file = sys.argv[1]

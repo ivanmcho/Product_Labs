@@ -1,19 +1,17 @@
 # Universidad Galileo
-# Mario Obed Morales Guitz
-## 24006981
-
-Este repositorio contiene el código y materiales utilizados en el **Laboratorio 2** del curso **Product Development**, parte del programa de **Maestría en Data Science** de la **Universidad Galileo**.
+# Marcos Hernandez 
+## 24008899
 
 El laboratorio implementa un flujo de trabajo de **AutoML**, desplegado en un contenedor Docker, con dos modos de ejecución:
-1. **Batch Prediction** (predicciones por lotes).
-2. **API Prediction** (predicciones en tiempo real mediante API).
+1. Batch Prediction (predicciones por lotes).
+2. API Prediction (predicciones en tiempo real mediante API).
 
 ---
 
 ## Requisitos previos
 
 Antes de comenzar, asegúrate de cumplir con los siguientes requisitos:
-1. **Docker** instalado.
+1. Docker instalado.
 2. Directorio local `localpath/data` con los datos de entrada para el modelo.
 3. Archivos `.env` configurados para cada modo de ejecución (detalles más adelante).
 
@@ -33,7 +31,7 @@ Esto crea la imagen Docker llamada `auto-ml:latest`.
 
 ## Paso 2: Ejecutar el contenedor
 
-Puedes ejecutar el contenedor en dos modos: **Batch Prediction** o **API Prediction**. Sigue los pasos según el modo que prefieras.
+Puedes ejecutar el contenedor en dos modos: Batch Prediction o API Prediction. Sigue los pasos según el modo que prefieras.
 
 ---
 
@@ -42,15 +40,7 @@ Puedes ejecutar el contenedor en dos modos: **Batch Prediction** o **API Predict
 Este modo permite procesar datos por lotes, buscando automáticamente archivos nuevos en un intervalo de tiempo.
 
 #### Pasos:
-1. Asegúrate de tener un archivo `.env` llamado `batch_prediction.env` con las siguientes variables:
-   ```env
-   INPUT_FOLDER=/app/data/input
-   OUTPUT_FOLDER=/app/data/output
-   DATASET=data/dataset.parquet
-   TARGET=Churn
-   MODEL=NaiveBayes
-   TRIALS=2
-   ```
+1. Asegúrate de tener un archivo `.env` llamado `batch_prediction.env`  puedes ver un ejemplo en la parte final de este documento:
 2. Crea los directorios `localpath/data/input` y `localpath/data/output` en tu máquina local.
 3. Ejecuta el contenedor:
    ```bash
@@ -71,14 +61,7 @@ El contenedor procesará archivos en `/app/data/input` y generará resultados en
 Este modo lanza un servidor de API para realizar predicciones en tiempo real.
 
 #### Pasos:
-1. Asegúrate de tener un archivo `.env` llamado `api_prediction.env` con las siguientes variables:
-   ```env
-   PORT=8000
-   DATASET=data/dataset.parquet
-   TARGET=Churn
-   MODEL=GradientBoosting
-   TRIALS=2
-   ```
+1. Asegúrate de tener un archivo `.env` llamado `api_prediction.env`, puedes ver un ejemplo en la parte final de este documento:
 2. Ejecuta el contenedor:
    ```bash
    docker run --env-file api_prediction.env -v "$(pwd)/data":/app/data -p 8000:8000 auto-ml:latest
@@ -122,6 +105,7 @@ La API devolverá predicciones en formato JSON.
 ---
 
 ## Resumen de archivos `.env`
+Importante poner el tipo/modo que se debe de ejecutar
 
 ### `batch_prediction.env`
 Ejemplo:
@@ -132,15 +116,21 @@ DATASET=data/dataset.parquet
 TARGET=Churn
 MODEL=NaiveBayes
 TRIALS=2
+DEPLOYMENT_TYPE=Batch
+n_iter=trials
 ```
+
 
 ### `api_prediction.env`
 Ejemplo:
 ```env
-PORT=8000
+INPUT_FOLDER=/app/data/input
+OUTPUT_FOLDER=/app/data/output
 DATASET=data/dataset.parquet
 TARGET=Churn
-MODEL=GradientBoosting
+MODEL=NaiveBayes
 TRIALS=2
+DEPLOYMENT_TYPE=API
+n_iter=trials
 ```
 
