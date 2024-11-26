@@ -21,7 +21,7 @@ def start_prediction_api():
     app = FastAPI(
         title="Prediction API",
         description="API para realizar predicciones usando un modelo entrenado",
-        version="1.0.0",
+        version="3.1.0",
     )
 
     # # Entrenamiento del modelo al iniciar el servicio
